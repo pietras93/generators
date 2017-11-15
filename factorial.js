@@ -29,10 +29,24 @@ function* factorial(n) {
   }
 }
 
+/**
+ * Wrapper for factorial iterator. It shells out error from array in case n is in wrong format
+ */
+const Factorial = (n) => {
+  
+  let [...result] = factorial(n)
+
+  if (typeof result[0] !== 'number') {
+    return result[0]
+  }
+
+  return result
+}
+
 // Usage:
-let [...a] = factorial(1) // -> [ 1 ]
-let [...b] = factorial(6) // -> [ 1, 2, 6, 24, 120, 720 ]
+let a = Factorial(1) // -> [ 1 ]
+let b = Factorial(6) // -> [ 1, 2, 6, 24, 120, 720 ]
 
 // Errors:
-let [...c] = factorial(-2) // -> [ Error: n is negative ... ]
-let [...d] = factorial('s') // -> [ Error: n is not a number ... ]
+let c = Factorial(-2) // -> Error: n is negative ...
+let d = Factorial('s') // -> Error: n is not a number ...
